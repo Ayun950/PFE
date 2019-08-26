@@ -1,0 +1,14 @@
+---
+- name: Saving running-conf
+  ios_command:
+     commands:
+        - command: 'copy running-config scp://ark@10.112.83.119/base-configs/{{hostname}}.cfg'
+          check_all: True
+          prompt: 'Address or name of remote host \[10.112.83.119\]?'
+          answer: "\r"
+          prompt: 'Destination username \[ark\]?'
+          answer: "\r"
+          prompt: 'Destination filename \[base-configs/PFE_Spoke2.cfg\]?'
+          answer: "\r"
+          prompt: 'Password:'
+          answer: "ark"

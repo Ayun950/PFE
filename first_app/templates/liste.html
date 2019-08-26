@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+   <body>
+<table border=1>
+	<thead>
+		<th>id</th>
+		<th>username</th>
+	</thead>
+	<tbody>
+	{% for row in users %}
+		<tr>
+			<td>{{row[0]}}</td>
+			<td>{{row[1]}}</td>
+			<td><form action="/supp_user" method="POST">
+				<button type="submit" name="username" value={{row[1]}}>Supprimer</button>
+				</form></td>
+ 
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+   </body>
+</html>
+

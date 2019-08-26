@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<style>
+input {
+  width: 150px;
+}
+</style>
+
+    <body>
+      <form action = "http://10.112.83.119:5000/rendu" method = "POST">
+        <div style="border:solid 1px black; background-color:lightsteelblue;">
+           <p>Attributs d'authentification et de connexion au CPE: </p>
+           <ul>
+              <li>Nom du tenant <input type="text" id="tenant" name="tenant" required /></li>
+              <li>Hostname <input type="text" id="name" name="name" required /></li>
+              <li>Mot de passe SSH<input type="text" id="password" name="password" required /></li>
+              <li>Addresse d'adminstration<input type="text" id="adress_admin" name="address_admin" required /></li>
+              <li>Mot de passe ipsec<input type="text" id="key" name="key" required /></li>
+           </ul>
+        </div>
+        <div style="border:solid 1px black; background-color:lightgray;">
+ 	   <p>Configuration de l'interface LAN du CPE:</p>
+           <ul>
+              <li>Nom<input type="text" id="int_name" name="int_name"</li>
+      	      <li>Description <input type="text" id="int_description" name="int_description"</li>
+	      <li>Addresse<input type="text" id="int_address" name="int_address"</li>
+	      <li>Masque de sous-reseau<input type="text" id="int_mask" name="int_mask"</li>
+           </ul>
+        </div>	
+
+<!--
+        <p>Choose the VPN link:</p>
+           <div>
+             <input type="checkbox" name="check" value="mpls">
+             <input type="checkbox" name="check" value="inet">
+           </div>  -->
+
+	<p><input type = "submit" value = "Valider"/></p>
+      </form>
+    </body>
+</html>
+

@@ -1,0 +1,6 @@
+---
+- name: Copy the .sql file to the radius DB
+  copy: 
+    src: ./roles/CreateFile/vars/{{name}}.sh 
+    dest: /tmp/{{name}}.sh
+    mode: '0775'

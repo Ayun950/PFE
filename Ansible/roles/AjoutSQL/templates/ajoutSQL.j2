@@ -1,0 +1,6 @@
+mysql -u user -ppassword freeradius <<EOF
+INSERT INTO radcheck (username,attribute,op,value) VALUES ('{{ name }}','Cleartext-Password',':=','{{ password }}')
+INSERT INTO radusergroup (username,groupname,priority) VALUES ('{{ name }}','ipsec',1)
+INSERT INTO radreply (username, attribute,op,value) VALUES ('{{ name }}','Cisco-AVPair','+=','{{ key }}')
+INSERT INTO userinfo (username,creationdate,creationby) VALUES ('{{ name }}',{{ d }},'administrator')
+EOF

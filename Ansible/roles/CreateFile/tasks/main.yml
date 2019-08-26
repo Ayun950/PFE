@@ -1,0 +1,5 @@
+---
+- name: Create the file .sql
+  template:
+    src: ajoutSQL.j2
+    dest: ./roles/CreateFile/vars/{{name}}.sh

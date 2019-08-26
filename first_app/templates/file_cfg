@@ -1,0 +1,8 @@
+---
+interfaces:
+   - name: {{int_name}}
+     address: {{int_address}}
+     mask: {{int_mask}}
+     description: {{int_description}}
+
+-

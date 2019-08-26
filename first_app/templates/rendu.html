@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+   <body>
+      <p> Les valeurs ci-dessous seront ajoutees a la base de donnees du serveur Radius:</p>
+      <table border = 1>
+         {% for key, value in rendu.items() %}
+            <tr>
+               <th> {{ key }} </th>
+               <td> {{ value }} </td>
+            </tr>
+         {% endfor %}
+      </table>
+      <form action="/">
+	<button type="submit">Accueil</button>
+      </form> 
+   </body>
+</html>

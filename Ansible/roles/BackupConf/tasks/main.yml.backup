@@ -1,0 +1,22 @@
+---
+- name: Define provider
+  set_fact:
+     provider:
+       host: "{{hostname}}"
+       username: "{{ansible_ssh_user}}"
+       password: "{{ansible_ssh_pass}}"
+
+- name: save running-config to the Ansible VM
+  ios_command:
+     provider: "{{provider}}"
+     commands:
+        - commands:
+             - copy running-config scp://ark@10.112.83.119/base-configs/{{hostname}}.cfg
+          prompt: 'Address or name of remote host \[10.112.83.119\]?'
+          answer: "\r"
+          prompt: 'Destination username \[ark\]?'
+          answer: "\r"
+          prompt: 'Destination filename \[base-configs/PFE_Spoke2.cfg\]?'
+          answer: "\r"
+          prompt: 'Password:'
+          answer: "ark"

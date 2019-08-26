@@ -1,0 +1,7 @@
+---
+- name: Prepare LAN configuration
+  hosts: localhost
+  gather_facts: no
+  become: true
+  roles:
+    - {role: "InitLan", tags: "IL"}

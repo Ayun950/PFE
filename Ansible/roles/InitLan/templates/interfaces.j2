@@ -1,0 +1,11 @@
+{% for interface in interfaces %}
+interface {{interface.name}}
+  vrf forwarding T1
+  ip address {{interface.address}} {{interface.mask}}
+  description {{interface.description}}
+  ip nbar protocol-discovery ipv4
+  zone-member security LAN
+  ip policy route-map RM_PBR
+  negotiation auto
+  no sh
+{% endfor %} 

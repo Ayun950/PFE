@@ -1,0 +1,10 @@
+---
+- name: Include vars
+  include_vars:
+    dir: host_vars
+    files_matching: "{{ hostname }}.yml"
+
+- name: Generate LAN configuration file
+  template: 
+    src: interfaces.j2 
+    dest: ../configs/{{hostname}}-lan.cfg

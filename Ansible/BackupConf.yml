@@ -1,0 +1,7 @@
+---
+- name: Saving the running configuration of the modified equipement to-be
+  hosts: all
+  gather_facts: false
+  connection: local
+  roles:
+    - {role: "BackupConf", tags: "BC"}

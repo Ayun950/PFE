@@ -1,0 +1,85 @@
+from flask import Flask, request, make_response, render_template
+from flask_mysqldb import MySQL
+from PIL import Image
+from StringIO import StringIO
+from datetime import datetime
+import re
+
+app = Flask('__name__')
+
+app.config['MYSQL_HOST'] = '10.112.83.118'
+app.config['MYSQL_USER'] = 'user'
+app.config['MYSQL_PASSWORD'] = 'password'
+app.config['MYSQL_DB'] = 'freeradius'
+
+mysql = MySQL(app)
+
+@app.route("/")
+def accueil():
+    return render_template('accueil.html', titre="Bienvenue !")
+
+@app.route("/ajout")
+def ajout():
+    return render_template('ajout.html', titre="Ajout")
+
+@app.route("/rendu" ,methods = ['POST', 'GET'])
+def rendu():
+    if request.method == 'POST':
+        rendu = request.form
+        #check_values = request.form.getlist('check')
+	name = rendu['name']
+	password = rendu['password']
+	key = 'ipsec:ikev2-password-remote='+rendu['key']
+	d = datetime.now()
+	cur =mysql.connection.cursor()
+	cur.execute("INSERT INTO radcheck (username,attribute,op,value) VALUES (%s,'Cleartext-Password',':=',%s)",(name,password))
+	cur.execute("INSERT INTO radusergroup (username,groupname,priority) VALUES (%s,'ipsec',1)", (name,))
+	cur.execute("INSERT INTO radreply (username, attribute,op,value) VALUES (%s,'Cisco-AVPair','+=',%s)", (name,key))
+	cur.execute("INSERT INTO userinfo (username,creationdate,creationby) VALUES (%s,%s,'administrator')",(name,d))
+        mysql.connection.commit()
+        cur.close()
+	#regex for modif inventory
+        regex = re.compile(r'^\[Spokes]$')
+with open("/home/ark/Ansible/inventory",'r') as fr:
+   ch = fr.read()
+   for line in ch:
+with open("/home/ark/inventory_dump",'w') as file2:
+result = regex.search(line)
+file2.append(line)
+if result:
+file2.append(result.group(0)
+)
+    return render_template("rendu.html", rendu = rendu)
+
+@app.route("/liste")
+def liste():
+	cur = mysql.connection.cursor()
+	cur.execute("SELECT id,username FROM userinfo")
+	users = cur.fetchall()
+	cur.close()
+	return render_template('liste.html', titre="Liste", users = users)
+
+@app.route("/supp_user" , methods =['POST','GET'])
+def supp_user():
+	if request.method == 'POST':
+        	rendu = request.form
+		username = rendu['username']
+		cur =mysql.connection.cursor()
+		sql_Delete_query = """Delete from radusergroup where radusergroup.username = %s"""
+		cur.execute(sql_Delete_query,(username,))
+		print("Delete from radusergroup successfully.")
+		sql_radcheck_del = """Delete from radcheck where radcheck.username = %s"""
+		cur.execute(sql_radcheck_del,(username,))
+		print("Delete from radcheck successfully.")
+		sql_radreply_del = """Delete from radreply where radreply.username = %s"""
+		cur.execute(sql_radreply_del,(username,))
+		print("Delete from radreply successfully.")
+		sql_userinfo_del = """Delete from userinfo where userinfo.username = %s"""
+		cur.execute(sql_userinfo_del,(username,))
+		print("Delete from userinfo successfully.")
+		mysql.connection.commit()
+		cur.close()
+	return render_template('supp_user.html', titre="Supprimer un equipement", rendu=rendu)
+
+if __name__ == '__main__':
+    app.run(debug=True)

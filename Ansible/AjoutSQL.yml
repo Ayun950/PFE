@@ -1,0 +1,12 @@
+---
+- name: Connection to the remote radius DB
+  hosts: localhost
+  gather_facts: no
+  roles:
+    - {role: "CreateFile", tags: "CF"}
+
+- name: Create bash script for SQL configuration
+  hosts: Servers 
+  gather_facts: no
+  roles:
+    - {role: "AjoutSQL", tags: "AS"}
