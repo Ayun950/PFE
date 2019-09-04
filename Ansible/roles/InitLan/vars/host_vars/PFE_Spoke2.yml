@@ -1,6 +1,0 @@
----
-interfaces:
-   - name: GigabitEthernet3
-     address: 192.168.1.254
-     mask: 255.255.255.0
-     description: 2608 1104

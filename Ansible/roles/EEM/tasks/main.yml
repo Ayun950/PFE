@@ -1,0 +1,9 @@
+---
+- name: config block eem
+  ios_config:
+     lines: no event manager applet ipsec-mpls-up authorization bypass
+  ignore_errors: yes
+
+- name: config block eem
+  ios_config:
+     src: eem.j2

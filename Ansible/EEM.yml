@@ -1,0 +1,6 @@
+---
+- name: EEM configuration
+  hosts: "{{ target }}"
+  gather_facts: no
+  roles:
+    - {role: "EEM", tags: "EE"}

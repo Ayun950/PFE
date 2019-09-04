@@ -84,14 +84,14 @@ def rendu():
       os.rename("/home/ark/Ansible/inventory_dump", "/home/ark/Ansible/inventory")
 
 # Via ansible configuration eem sur l'equipement distant 
-      cmd="ansible "+name+" -i /home/ark/Ansible/inventory -m ios_config -a \"src=/home/ark/Ansible/eem.yml\" -c local -vvvv" 
+      cmd="ansible-playbook -i /home/ark/Ansible/inventory -e target="+name+" /home/ark/Ansible/EEM.yml -c local -vvvv" 
       retval=os.system(cmd)
       print(retval)
 
 # Ajout du nouvel equipement dans la base de donnees du serveur Radius
 
       key = 'ipsec:ikev2-password-remote='+rendu['key']
-      cmd="ansible-playbook /home/ark/Ansible/AjoutSQL.yml -i /home/ark/Ansible/inventory  -e name="+name+" -e key="+key+" -e password="+password+" -e d=CURDATE\(\) -vvvv"
+      cmd="ansible-playbook /home/ark/Ansible/AjoutSQL.yml -i /home/ark/Ansible/inventory  -e name="+name+" -e key="+key+" -e password="+password+" -e d=CURDATE\(\) -e local_route="+rendu['local_route']+" -e int_mask="+int_mask+" -vvvv"
       retval=os.system(cmd)
       print(retval)
       return render_template("rendu.html", rendu = rendu)
@@ -142,6 +142,11 @@ def supp_user():
 
       #suppression du fichier de configuration configs/
       cmd="rm -f /home/ark/configs/*"+username+"*"
+      retval=os.system(cmd)
+      print(retval)
+
+      #suppression du fichier de script sql
+      cmd="rm -f /home/ark/Ansible/roles/CreateFile/vars/"+username+"*"
       retval=os.system(cmd)
       print(retval)
 

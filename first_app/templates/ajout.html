@@ -7,25 +7,45 @@ input {
 </style>
 
     <body>
-      <form action = "http://10.112.83.119:5000/rendu" method = "POST">
+      <form action = "http://172.16.63.119:5000/rendu" method = "POST">
         <div style="border:solid 1px black; background-color:lightsteelblue;">
            <p>Attributs d'authentification et de connexion au CPE: </p>
+           <table>
+              <tr><td>
            <ul>
-              <li>Nom du tenant <input type="text" id="tenant" name="tenant" required /></li>
-              <li>Hostname <input type="text" id="name" name="name" required /></li>
-              <li>Mot de passe SSH<input type="text" id="password" name="password" required /></li>
-              <li>Addresse d'adminstration<input type="text" id="adress_admin" name="address_admin" required /></li>
-              <li>Mot de passe ipsec<input type="text" id="key" name="key" required /></li>
-           </ul>
+              <li>Nom du tenant 
+              <li>Hostname 
+              <li>Mot de passe SSH
+              <li>Addresse d'adminstration
+              <li>Mot de passe ipsec</ul>
+</td><td>
+          <input type="text" id="tenant" name="tenant" required /><br>
+          <input type="text" id="name" name="name" required /><br>
+          <input type="text" id="password" name="password" required /><br>
+          <input type="text" id="adress_admin" name="address_admin" required /><br>
+          <input type="text" id="key" name="key" required /><br>
+       </td></tr>
+       </table> 
         </div>
         <div style="border:solid 1px black; background-color:lightgray;">
  	   <p>Configuration de l'interface LAN du CPE:</p>
+           <table>
+              <tr><td>
            <ul>
-              <li>Nom<input type="text" id="int_name" name="int_name"</li>
-      	      <li>Description <input type="text" id="int_description" name="int_description"</li>
-	      <li>Addresse<input type="text" id="int_address" name="int_address"</li>
-	      <li>Masque de sous-reseau<input type="text" id="int_mask" name="int_mask"</li>
+              <li>Nom
+      	      <li>Description
+	      <li>Addresse
+	      <li>Masque de sous-reseau
+	      <li>Reseau local
            </ul>
+</td><td>
+<input type="text" id="int_name" name="int_name"><br>
+<input type="text" id="int_description" name="int_description"><br>
+<input type="text" id="int_address" name="int_address"><br>
+<input type="text" id="int_mask" name="int_mask"><br>
+<input type="text" id="local_route" name="local_route"><br>
+   </td></tr>
+       </table>
         </div>	
 
 <!--
