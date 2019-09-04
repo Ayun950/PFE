@@ -10,7 +10,7 @@ Using FlexVPN, Radius, Ansible
 
 * Résumé
 
-Le but de ce projet est de créer une solution flexible, adaptative et multi-tenant avec des équipements et licences non spécifiques au SD-WAN.
+Le but de ce projet est de créer une solution flexible, adaptative et multi-tenant avec des équipements et licences non spécifiques au SD-WAN. L'utilisateur aura la possibilité d'ajouter un site client via une interface utilisateur compacte. 
 
 La maquette de test est composée de machines Debain et de routeurs virtuels CSR1000V.
 
@@ -23,5 +23,5 @@ Ci-dessous, un schéma fonctionnel:
 
 ### Procédure de mise en place
 
+Ce dépôt Git contient essentiellement les dossiers des fichiers d'Ansible et de Flask.
 
-### Conclusion et recommandations
